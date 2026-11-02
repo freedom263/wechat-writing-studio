@@ -86,7 +86,11 @@ async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSess
         supplementary=payload.supplementary or "无额外补充",
         word_count=payload.word_count,
         tone=payload.tone or "专业通俗",
-        target_reader=payload.target_reader or "大众读者"
+        target_reader=payload.target_reader or "大众读者",
+        language_style=getattr(payload, 'language_style', None) or "清晰流畅",
+        professionalism=getattr(payload, 'professionalism', None) or "适中",
+        formatting=getattr(payload, 'formatting', None) or "标准排版",
+        custom_requirements=getattr(payload, 'custom_requirements', None) or "无"
     )
 
     # 预创建 Article 记录
@@ -100,7 +104,11 @@ async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSess
         input_options={
             "word_count": payload.word_count,
             "tone": payload.tone,
-            "target_reader": payload.target_reader
+            "target_reader": payload.target_reader,
+            "language_style": getattr(payload, 'language_style', '清晰流畅'),
+            "professionalism": getattr(payload, 'professionalism', '适中'),
+            "formatting": getattr(payload, 'formatting', '标准排版'),
+            "custom_requirements": getattr(payload, 'custom_requirements', '')
         },
         status="outline_generating"
     )
@@ -140,21 +148,21 @@ async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSess
                     "title": f"深入解读：关于「{payload.topic}」的核心思考",
                     "summary": "兼顾深度与实用价值的标准论述",
                     "tags": ["深度解析", "核心方法"],
-                    "outline_sections": ["一、背景引言与现状问题", "二、核心病机与关键症结剖析", "三、落地应对法则与实操指引", "四、总结与展望"]
+                    "outline_sections": ["一、背景引言与现状分析", "二、核心概念与关键要点", "三、实践应用与方法指引", "四、总结与展望"]
                 },
                 {
                     "index": 2,
-                    "title": f"关于「{payload.topic}」，这3个误区很多人都踩过",
-                    "summary": "从痛点误区切入，强吸引力与避坑指南",
+                    "title": f"关于「{payload.topic}」，这些常见误区需要避开",
+                    "summary": "从痛点误区切入，提供避坑指南",
                     "tags": ["避坑指南", "实操干货"],
-                    "outline_sections": ["一、生活高频误区盘点", "二、为什么会产生这些误区", "三、科学权威的正确做法", "四、日常保健习惯养成"]
+                    "outline_sections": ["一、常见误区盘点", "二、误区产生的原因分析", "三、正确的理解与做法", "四、行动建议与注意事项"]
                 },
                 {
                     "index": 3,
                     "title": f"普通人如何理解「{payload.topic}」？一份极简入门指南",
-                    "summary": "通俗易懂的极简指南，适合广泛转发",
-                    "tags": ["通俗科普", "行动清单"],
-                    "outline_sections": ["一、用生活大白话读懂核心要义", "二、体质或认知自查两步法", "三、循序渐进的改善清单", "四、给读者的暖心寄语"]
+                    "summary": "通俗易懂的极简指南，适合广泛传播",
+                    "tags": ["通俗易懂", "入门指南"],
+                    "outline_sections": ["一、用简单的语言理解核心要义", "二、快速上手的方法", "三、循序渐进的实践清单", "四、给读者的建议与鼓励"]
                 }
             ]
 
@@ -218,11 +226,19 @@ async def generate_article_stream(payload: GenerateArticleRequest, db: AsyncSess
         "请根据标题【{title}】以及大纲：\n{outline}\n展开撰写约 {word_count} 字的完整正文（Markdown 格式）。"
     )
 
+    # 从 article.input_options 中获取用户参数
+    input_opts = article.input_options or {}
     user_prompt = render_prompt_template(
         raw_user_tpl,
         title=payload.selected_title,
         outline=payload.confirmed_outline,
-        word_count=word_count_opt
+        word_count=word_count_opt,
+        tone=input_opts.get('tone', '专业通俗'),
+        target_reader=input_opts.get('target_reader', '大众读者'),
+        language_style=input_opts.get('language_style', '清晰流畅'),
+        professionalism=input_opts.get('professionalism', '适中'),
+        formatting=input_opts.get('formatting', '标准排版'),
+        custom_requirements=input_opts.get('custom_requirements', '无')
     )
 
     append_disclaimer = prompt_config.append_disclaimer if prompt_config else (article.category_id == "tcm_health")

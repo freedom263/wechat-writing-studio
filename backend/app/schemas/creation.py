@@ -18,6 +18,10 @@ class GenerateOutlineRequest(BaseModel):
     word_count: int = 1500
     tone: Optional[str] = "专业通俗"
     target_reader: Optional[str] = "大众读者"
+    language_style: Optional[str] = "清晰流畅"
+    professionalism: Optional[str] = "适中"
+    formatting: Optional[str] = "标准排版"
+    custom_requirements: Optional[str] = ""
 
 class TopicSuggestion(BaseModel):
     topic: str

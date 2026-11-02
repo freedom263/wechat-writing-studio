@@ -18,12 +18,16 @@ CATEGORIES_DATA = [
     {"id": "current_affairs", "name": "时事观点", "icon": "Flame", "sort_order": 3, "description": "热点新闻解读与独家洞察"},
     {"id": "workplace", "name": "职场成长", "icon": "Briefcase", "sort_order": 4, "description": "职场进阶、沟通法则与管理思维"},
     {"id": "emotion", "name": "情感心理", "icon": "Heart", "sort_order": 5, "description": "心理共情、亲密关系与治愈故事"},
-    {"id": "tech", "name": "科技商业", "icon": "Cpu", "sort_order": 6, "description": "AI趋势、商业商业模式与行业研报"},
+    {"id": "tech", "name": "科技商业", "icon": "Cpu", "sort_order": 6, "description": "AI趋势、商业模式与行业研报"},
     {"id": "life", "name": "生活方式", "icon": "Coffee", "sort_order": 7, "description": "极简生活、日常美学与城市漫步"},
     {"id": "education", "name": "家庭教育", "icon": "GraduationCap", "sort_order": 8, "description": "亲子沟通、教育理念与儿童心理"},
     {"id": "culture", "name": "历史人文", "icon": "Landmark", "sort_order": 9, "description": "历史人物、传统文化与文史新读"},
     {"id": "travel", "name": "旅行游记", "icon": "Compass", "sort_order": 10, "description": "路线攻略、小众目的地与旅行随笔"},
-    {"id": "operation", "name": "产品运营", "icon": "TrendingUp", "sort_order": 11, "description": "自媒体运营、用户增长与产品思考"}
+    {"id": "operation", "name": "产品运营", "icon": "TrendingUp", "sort_order": 11, "description": "自媒体运营、用户增长与产品思考"},
+    {"id": "finance", "name": "理财投资", "icon": "DollarSign", "sort_order": 12, "description": "理财规划、投资策略与财商教育"},
+    {"id": "food", "name": "美食探店", "icon": "UtensilsCrossed", "sort_order": 13, "description": "美食测评、探店攻略与烹饪分享"},
+    {"id": "entertainment", "name": "影视娱乐", "icon": "Film", "sort_order": 14, "description": "影评剧评、娱乐八卦与流行文化"},
+    {"id": "fitness", "name": "运动健身", "icon": "Dumbbell", "sort_order": 15, "description": "健身教程、运动科学与体态管理"}
 ]
 
 # 预置模板（重点丰富中医/医疗与读书赛道）
@@ -88,10 +92,10 @@ TEMPLATES_DATA = [
     {
         "id": "book_golden_quote", "category_id": "book_review", "name": "金句摘读", "tag": "金句解析", "sort_order": 2,
         "description": "围绕书中关键金句展开思考与生活延伸，适合轻松有趣的启发性分享。",
-        "outline_system": "你是一位擅长情感共鸣与金句拆解的内容导师，善于从单句话引出深度思考。",
-        "outline_user": "针对主题【{topic}】设计 3 组金句引申式大纲方案。以 JSON 格式输出。",
-        "article_system": "你是一位温暖治愈的读书博主，用轻快细腻的笔触展开金句解读。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字金句分享文章。",
+        "outline_system": "你是一位擅长情感共鸣与金句拆解的内容导师，善于从单句话引出深度思考。你的任务是识别并提炼书中的精华金句。",
+        "outline_user": "针对书籍或作品【{topic}】设计 3 组金句摘读式大纲方案。\n\n**核心要求**：\n1. 每组方案需聚焦书中 3-5 条具有启发性的金句\n2. 为每条金句设计深度解读与生活场景延伸\n3. 面向受众：{target_reader}\n4. 语言风格：{language_style}\n5. 写作基调：{tone}\n6. 专业程度：{professionalism}\n\n补充要求：{supplementary}\n自定义需求：{custom_requirements}\n\n请严格以 JSON 格式输出，包含 candidates: [{{index, title, summary, tags, outline_sections}}]。",
+        "article_system": "你是一位温暖治愈的读书博主，用轻快细腻的笔触展开金句解读。你善于将金句与读者的生活经验建立共鸣连接。",
+        "article_user": "根据标题【{title}】和大纲【{outline}】撰写约 {word_count} 字的金句分享文章。\n\n**写作要求**：\n1. 逐条呈现金句原文并标注出处（页码或章节）\n2. 每条金句后附上 200-300 字的深度解读\n3. 结合当代生活场景进行延伸思考\n4. 排版格式：{formatting}\n5. 语言风格：{language_style}\n6. 专业程度：{professionalism}\n7. 写作基调：{tone}\n\n自定义需求：{custom_requirements}",
         "append_disclaimer": False
     },
     {
@@ -263,6 +267,59 @@ TEMPLATES_DATA = [
         "outline_user": "针对运营策略【{topic}】设计 3 组干货大纲。以 JSON 输出。",
         "article_system": "你是一位实战派运营导师，输出可复制的增长方法论。",
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字干货长文。",
+        "append_disclaimer": False
+    },
+
+    # 12. 理财投资
+    {
+        "id": "fin_plan", "category_id": "finance", "name": "理财规划指南", "tag": "财商教育", "sort_order": 1,
+        "description": "从小白到进阶的理财规划方法、投资策略与风险管理。",
+        "outline_system": "你是一位持证理财规划师与投资顾问，擅长用通俗语言讲解金融知识。",
+        "outline_user": "针对理财主题【{topic}】设计 3 组实用大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位财商教育专家，提供可落地的理财建议。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字理财科普文章。语言风格：{language_style}，写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "fin_analysis", "category_id": "finance", "name": "投资分析", "tag": "投资策略", "sort_order": 2,
+        "description": "深度分析投资标的、市场趋势与投资机会。",
+        "outline_system": "你是一位资深投资分析师，具备深厚的金融市场分析能力。",
+        "outline_user": "针对投资分析主题【{topic}】设计 3 组专业大纲。以 JSON 输出。",
+        "article_system": "你是一位专业的投资分析师，提供客观深入的市场分析。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字投资分析文章。",
+        "append_disclaimer": False
+    },
+
+    # 13. 美食探店
+    {
+        "id": "food_review", "category_id": "food", "name": "美食测评", "tag": "探店体验", "sort_order": 1,
+        "description": "真实的探店体验、菜品测评与美食推荐。",
+        "outline_system": "你是一位资深美食博主与探店达人，对美食有独到的品鉴眼光。",
+        "outline_user": "针对美食探店主题【{topic}】设计 3 组吸引人的大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位生动有趣的美食作家，善于用文字呈现美食的色香味。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字美食测评文章。写作基调：{tone}，排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
+
+    # 14. 影视娱乐
+    {
+        "id": "film_review", "category_id": "entertainment", "name": "影评剧评", "tag": "深度解析", "sort_order": 1,
+        "description": "深度剖析影视作品的艺术价值、社会意义与文化内涵。",
+        "outline_system": "你是一位专业影评人与文化评论家，具备深厚的影视艺术素养。",
+        "outline_user": "针对影视作品【{topic}】设计 3 组深度影评大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位知名影评人，擅长从多维度解读影视作品。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字影评文章。语言风格：{language_style}，写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+
+    # 15. 运动健身
+    {
+        "id": "fitness_guide", "category_id": "fitness", "name": "健身教程", "tag": "训练指导", "sort_order": 1,
+        "description": "科学的健身训练方法、营养指导与体态管理方案。",
+        "outline_system": "你是一位持证健身教练与运动康复专家，熟悉运动科学与训练方法。",
+        "outline_user": "针对健身主题【{topic}】设计 3 组实用训练大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位专业健身教练，提供科学安全的训练指导。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字健身指导文章。语言风格：{language_style}，排版格式：{formatting}。自定义需求：{custom_requirements}。",
         "append_disclaimer": False
     }
 ]

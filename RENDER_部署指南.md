@@ -51,8 +51,6 @@
 
 5. 创建后，进入数据库详情页，复制 **Internal Database URL**（以 `postgresql://` 开头）
 
-   postgresql://wechat_user:MRqtmkFDebrhrZ114d9ok6stb67upnCx@dpg-dbk5fr8473hc73fm7e2g-a/wechat_db_2w2z
-
 ### 第二步：部署后端服务
 
 1. 回到 Render Dashboard，点击 **New +** → **Web Service**
@@ -83,17 +81,17 @@
 
 ```bash
 DATABASE_URL=<粘贴第一步复制的 Internal Database URL>
-DEEPSEEK_API_KEY=sk-cxoekubuyjouknznlwglhrkwtthtgbwqicpyocjglajzbvhe
+DEEPSEEK_API_KEY=<你的 DeepSeek API Key>
 DEEPSEEK_BASE_URL=https://api.deepseek.com
-FRONTEND_URL=https://wechat-frontend.onrender.com
+FRONTEND_URL=https://wechat-frontend-h64p.onrender.com
 ```
 
 **注意**：`FRONTEND_URL` 先用占位符，第三步部署前端后再回来更新
 
 5. 点击 **Create Web Service**
 6. 等待 5-10 分钟构建部署
-7. 部署成功后，Render 会分配域名，例如：
-   - `https://wechat-backend.onrender.com`
+7. 部署成功后，Render 会分配域名，你的后端地址：
+   - https://wechat-backend-49g7.onrender.com
 
 ### 第三步：部署前端服务
 
@@ -103,19 +101,13 @@ FRONTEND_URL=https://wechat-frontend.onrender.com
    - **Name**: `wechat-frontend`
    - **Branch**: `main` 或 `master`
    - **Root Directory**: `frontend`
-   - **Build Command**: `npm install && npm run build`
+   - **Build Command**: `npm install && VITE_API_BASE_URL=https://wechat-backend-49g7.onrender.com npm run build`
    - **Publish Directory**: `dist`
-4. 点击 **Advanced**，添加环境变量：
-
-```bash
-VITE_API_BASE_URL=https://wechat-backend.onrender.com
-```
-
-**重要**：将上面的 URL 替换为第二步中后端服务的实际域名
+4. **重要**：Render 的 Static Site 不支持运行时环境变量，必须在构建命令中内联设置。将上面 Build Command 中的 URL 替换为第二步中后端服务的实际域名。
 
 5. 点击 **Create Static Site**
-6. 等待构建完成，访问前端域名：
-   - `https://wechat-frontend.onrender.com`
+6. 等待构建完成，访问你的前端域名：
+   - https://wechat-frontend-h64p.onrender.com
 
 ### 第四步：更新后端环境变量
 
@@ -123,7 +115,7 @@ VITE_API_BASE_URL=https://wechat-backend.onrender.com
 2. 进入 **Environment** 标签
 3. 更新 `FRONTEND_URL` 为前端实际域名：
    ```
-   FRONTEND_URL=https://wechat-frontend.onrender.com
+   FRONTEND_URL=https://wechat-frontend-h64p.onrender.com
    ```
 4. 点击 **Save Changes**，后端会自动重新部署（约 2-3 分钟）
 
@@ -132,7 +124,7 @@ VITE_API_BASE_URL=https://wechat-backend.onrender.com
 ## ✅ 验证部署
 
 ### 1. 检查后端健康状态
-访问：`https://wechat-backend.onrender.com/`
+访问：https://wechat-backend-49g7.onrender.com/
 
 应该返回：
 ```json
@@ -145,12 +137,12 @@ VITE_API_BASE_URL=https://wechat-backend.onrender.com
 ```
 
 ### 2. 检查 API 文档
-访问：`https://wechat-backend.onrender.com/docs`
+访问：https://wechat-backend-49g7.onrender.com/docs
 
 应该能看到完整的 API 文档页面
 
 ### 3. 检查前端应用
-访问：`https://wechat-frontend.onrender.com/`
+访问：https://wechat-frontend-h64p.onrender.com/
 
 应该能正常打开应用界面
 
@@ -288,7 +280,7 @@ VITE_API_BASE_URL=https://wechat-backend.onrender.com
 
 ### 1. 保护敏感信息
 - ❌ 不要将 `.env` 文件提交到 Git
-- ✅ 使用 Railway 的环境变量功能
+- ✅ 使用 Render 的环境变量功能
 - ✅ 在 `.gitignore` 中排除 `.env*` 文件
 
 ### 2. API Key 管理
@@ -296,7 +288,7 @@ VITE_API_BASE_URL=https://wechat-backend.onrender.com
 - 在 DeepSeek 平台设置使用限额
 
 ### 3. 监控日志
-- 定期查看 Railway 日志
+- 定期查看 Render 日志
 - 关注异常错误和访问模式
 
 ---
@@ -331,15 +323,15 @@ psql <External_Database_URL> < backup.sql
 ## 🎯 下一步优化
 
 1. **自定义域名**
-   - Railway 支持绑定自定义域名
-   - Settings → **Domains** → **Add Custom Domain**
+   - Render 支持绑定自定义域名
+   - Settings → **Custom Domain** → 添加你的域名
 
 2. **配置监控告警**
    - 集成 UptimeRobot 监控网站可用性
    - 配置邮件告警
 
 3. **性能优化**
-   - 启用 Redis 缓存（Railway 支持）
+   - 启用 Redis 缓存（Render 支持）
    - 优化数据库查询
 
 4. **功能扩展**
