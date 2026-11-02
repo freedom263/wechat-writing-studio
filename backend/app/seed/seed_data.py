@@ -2,6 +2,7 @@ import asyncio
 import os
 from sqlalchemy import select
 from app.core.database import AsyncSessionLocal, engine, Base
+from app.core.config import settings
 from app.models.category import Category, Template
 from app.models.prompt_config import PromptConfig
 from app.models.article import Article, OutlineCandidate
