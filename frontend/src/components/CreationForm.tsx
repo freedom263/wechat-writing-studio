@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link2, Lightbulb, FileText, Sparkles, Loader2, Wand2, RefreshCw, CheckCircle2, ChevronRight, X } from 'lucide-react';
 import { parseUrl, expandTopic } from '../api/client';
 import { Template, Category } from '../types';
+import { LoadingSkeleton } from './LoadingSkeleton';
 
 interface CreationFormProps {
   selectedCategory: Category | null;
@@ -278,8 +279,8 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <button
               type="button"
               onClick={() => setInputType('topic')}
-              className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                inputType === 'topic' ? 'bg-white text-blue-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1 rounded-md font-semibold transition-smooth ${
+                inputType === 'topic' ? 'bg-white text-blue-700 shadow-md' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               主题自由创作
@@ -287,8 +288,8 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <button
               type="button"
               onClick={() => setInputType('url')}
-              className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                inputType === 'url' ? 'bg-white text-blue-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1 rounded-md font-semibold transition-smooth ${
+                inputType === 'url' ? 'bg-white text-blue-700 shadow-md' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               文章链接转化
@@ -296,8 +297,8 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <button
               type="button"
               onClick={() => setInputType('material')}
-              className={`px-3 py-1 rounded-md font-semibold transition-colors ${
-                inputType === 'material' ? 'bg-white text-blue-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1 rounded-md font-semibold transition-smooth ${
+                inputType === 'material' ? 'bg-white text-blue-700 shadow-md' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               素材库提取
@@ -308,7 +309,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <button
               type="button"
               onClick={handleApplyPreset}
-              className="text-[11px] text-blue-700 hover:bg-blue-50 px-2 py-0.5 rounded border border-blue-200 flex items-center space-x-1 font-medium transition-colors"
+              className="text-[11px] text-blue-700 hover:bg-blue-50 px-2 py-0.5 rounded border border-blue-200 flex items-center space-x-1 font-medium transition-smooth hover-lift"
               title="载入本模板专属示例"
             >
               <Wand2 className="w-3 h-3 text-blue-600" />
@@ -317,7 +318,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <button
               type="button"
               onClick={handleClearInputs}
-              className="text-[11px] text-slate-400 hover:text-slate-700 px-1.5 py-0.5 rounded hover:bg-slate-100 transition-colors"
+              className="text-[11px] text-slate-400 hover:text-slate-700 px-1.5 py-0.5 rounded hover:bg-slate-100 transition-smooth"
               title="清空主题与说明"
             >
               清空
@@ -335,20 +336,20 @@ export const CreationForm: React.FC<CreationFormProps> = ({
                 placeholder="https://mp.weixin.qq.com/s/..."
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="flex-1 bg-white border border-slate-300 rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                className="flex-1 bg-white border border-slate-300 rounded px-2.5 py-1 text-xs focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-smooth"
               />
               <button
                 type="button"
                 onClick={handleParseUrl}
                 disabled={isParsingUrl || !url.trim()}
-                className="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-xs font-semibold shrink-0 flex items-center space-x-1 disabled:opacity-50 transition-colors"
+                className="px-3 py-1 bg-slate-900 hover:bg-slate-800 active:bg-slate-950 text-white rounded text-xs font-semibold shrink-0 flex items-center space-x-1 disabled:opacity-50 transition-smooth hover-lift"
               >
                 {isParsingUrl ? <Loader2 className="w-3 h-3 animate-spin text-white" /> : null}
-                <span>提取</span>
+                <span>{isParsingUrl ? '提取中...' : '提取'}</span>
               </button>
             </div>
             {urlExtractNotice && (
-              <p className="text-[10px] text-emerald-700 font-medium">{urlExtractNotice}</p>
+              <p className="text-[10px] text-emerald-700 font-medium animate-fade-in">{urlExtractNotice}</p>
             )}
           </div>
         )}
@@ -370,11 +371,11 @@ export const CreationForm: React.FC<CreationFormProps> = ({
                 type="button"
                 onClick={() => handleAiExpand(1)}
                 disabled={isExpanding}
-                className="text-[11px] text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded flex items-center space-x-1 font-semibold transition-colors disabled:opacity-50"
+                className="text-[11px] text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded flex items-center space-x-1 font-semibold transition-smooth disabled:opacity-50"
                 title="输入零散关键词（如：立冬 萝卜），AI 自动理解意图扩展为专业标题与行文要求"
               >
                 {isExpanding ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
-                <span>AI 意图扩写</span>
+                <span>{isExpanding ? 'AI 构思中...' : 'AI 意图扩写'}</span>
               </button>
               <span className="text-[10px] text-slate-400">{topic.length}/100</span>
             </div>
@@ -385,7 +386,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             maxLength={100}
             onChange={(e) => setTopic(e.target.value)}
             placeholder={currentPreset?.topicPlaceholder || '输入零散关键词（如：立冬 萝卜）或完整主题...'}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:bg-white focus:ring-1 focus:ring-blue-500 focus:outline-none transition-colors"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:bg-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-smooth"
           />
 
           {/* AI 意图理解扩写结果面板（包含换一换） */}
@@ -421,10 +422,10 @@ export const CreationForm: React.FC<CreationFormProps> = ({
                   <div
                     key={idx}
                     onClick={() => handleAdoptSuggestion(item, idx)}
-                    className={`p-2 rounded-lg border bg-white cursor-pointer transition-all flex items-start justify-between ${
+                    className={`p-2 rounded-lg border bg-white cursor-pointer transition-smooth hover-lift flex items-start justify-between ${
                       adoptedIndex === idx
-                        ? 'border-emerald-500 bg-emerald-50/40 ring-1 ring-emerald-500'
-                        : 'border-slate-200 hover:border-blue-400 hover:shadow-2xs'
+                        ? 'border-emerald-500 bg-emerald-50/40 ring-1 ring-emerald-500 shadow-md'
+                        : 'border-slate-200 hover:border-blue-400 hover:shadow-md'
                     }`}
                   >
                     <div className="space-y-0.5 flex-1 pr-2">
@@ -438,7 +439,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
                     </div>
                     <div className="shrink-0 pt-0.5">
                       {adoptedIndex === idx ? (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 animate-fade-in" />
                       ) : (
                         <span className="text-[10px] text-blue-600 font-semibold flex items-center hover:underline">
                           采纳 <ChevronRight className="w-3 h-3" />
@@ -464,7 +465,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             value={supplementary}
             onChange={(e) => setSupplementary(e.target.value)}
             placeholder={currentPreset?.suppPlaceholder || '例如：重点突出实操建议，语言逻辑严密...'}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:bg-white focus:ring-1 focus:ring-blue-500 focus:outline-none transition-colors resize-none"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-900 focus:bg-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-smooth resize-none"
           />
         </div>
 
@@ -484,10 +485,10 @@ export const CreationForm: React.FC<CreationFormProps> = ({
                 key={item.count}
                 type="button"
                 onClick={() => setWordCount(item.count)}
-                className={`py-1.5 px-1 rounded-lg border text-center transition-colors ${
+                className={`py-1.5 px-1 rounded-lg border text-center transition-smooth hover-lift ${
                   wordCount === item.count
-                    ? 'border-blue-600 bg-blue-50/70 text-blue-900 font-bold ring-1 ring-blue-600'
-                    : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                    ? 'border-blue-600 bg-blue-50/70 text-blue-900 font-bold ring-1 ring-blue-600 scale-105'
+                    : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:shadow-md'
                 }`}
               >
                 <div className="text-xs font-bold">{item.count}字</div>
@@ -504,7 +505,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs text-slate-700 focus:bg-white focus:outline-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs text-slate-700 focus:bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-smooth"
             >
               <option value="专业且通俗 (推荐)">专业且通俗 (推荐)</option>
               <option value="温暖治愈">温暖治愈</option>
@@ -518,7 +519,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
             <select
               value={targetReader}
               onChange={(e) => setTargetReader(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs text-slate-700 focus:bg-white focus:outline-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1 text-xs text-slate-700 focus:bg-white focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-smooth"
             >
               <option value="普通大众读者">普通大众读者</option>
               <option value="中老年人及养生关注者">中老年人及养生关注者</option>
@@ -535,7 +536,7 @@ export const CreationForm: React.FC<CreationFormProps> = ({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg shadow-sm flex items-center justify-center space-x-2 transition-colors disabled:opacity-50 cursor-pointer"
+          className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg shadow-sm flex items-center justify-center space-x-2 transition-smooth hover-lift disabled:opacity-50 cursor-pointer"
         >
           {isLoading ? (
             <>

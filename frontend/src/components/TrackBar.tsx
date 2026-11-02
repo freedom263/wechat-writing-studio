@@ -48,10 +48,10 @@ export const TrackBar: React.FC<TrackBarProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-smooth ${
                 isSelected
-                  ? 'bg-slate-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 border border-slate-200'
+                  ? 'bg-slate-900 text-white shadow-lg scale-105'
+                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 border border-slate-200 hover:scale-102'
               }`}
             >
               <span>{ICON_MAP[cat.icon] || <BookOpen className="w-3.5 h-3.5" />}</span>

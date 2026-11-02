@@ -62,10 +62,10 @@ export const CandidatesView: React.FC<CandidatesViewProps> = ({
           return (
             <div
               key={cand.index}
-              className={`rounded-xl border transition-all ${
+              className={`rounded-xl border transition-smooth hover-lift ${
                 isSelected
-                  ? 'border-blue-600 bg-blue-50/20 ring-2 ring-blue-600 shadow-xs'
-                  : 'border-slate-200 bg-slate-50/40 hover:border-slate-300'
+                  ? 'border-blue-600 bg-blue-50/20 ring-2 ring-blue-600 shadow-lg'
+                  : 'border-slate-200 bg-slate-50/40 hover:border-slate-300 hover:shadow-md'
               }`}
             >
               <div
@@ -78,7 +78,7 @@ export const CandidatesView: React.FC<CandidatesViewProps> = ({
                   }`}>
                     方案 {cand.index}
                   </span>
-                  {isSelected && <CheckCircle className="w-4 h-4 text-blue-600" />}
+                  {isSelected && <CheckCircle className="w-4 h-4 text-blue-600 animate-fade-in" />}
                 </div>
 
                 <h4 className="text-xs font-bold text-slate-900 mb-2 leading-snug line-clamp-2">
@@ -171,10 +171,12 @@ export const CandidatesView: React.FC<CandidatesViewProps> = ({
         <button
           onClick={() => onConfirmGenerateArticle(selectedCandidate)}
           disabled={isGeneratingArticle}
-          className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg text-xs flex items-center space-x-2 shadow-sm transition-colors disabled:opacity-50 cursor-pointer"
+          className={`px-6 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg text-xs flex items-center space-x-2 shadow-sm transition-smooth disabled:opacity-50 ${
+            isGeneratingArticle ? 'cursor-not-allowed' : 'cursor-pointer hover-lift'
+          }`}
         >
-          <span>以此大纲进入全文写作与排版</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <span>{isGeneratingArticle ? '正在生成全文...' : '以此大纲进入全文写作与排版'}</span>
+          <ArrowRight className={`w-3.5 h-3.5 ${isGeneratingArticle ? 'animate-bounce-gentle' : ''}`} />
         </button>
       </div>
     </div>

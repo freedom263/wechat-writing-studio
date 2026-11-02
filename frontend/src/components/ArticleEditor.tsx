@@ -165,7 +165,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
             全文字数：<strong className="text-slate-900 font-bold">{wordCount}</strong> 字
           </span>
           {saveNotice && (
-            <span className="text-xs text-emerald-600 font-medium flex items-center space-x-1">
+            <span className="text-xs text-emerald-600 font-medium flex items-center space-x-1 animate-fade-in">
               <Check className="w-3.5 h-3.5" />
               <span>{saveNotice}</span>
             </span>
@@ -176,15 +176,15 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           <button
             onClick={handleSave}
             disabled={isSaving || isStreaming}
-            className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-colors"
+            className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-smooth disabled:opacity-50"
           >
-            <Save className="w-3.5 h-3.5" />
-            <span>保存草稿</span>
+            <Save className={`w-3.5 h-3.5 ${isSaving ? 'animate-spin' : ''}`} />
+            <span>{isSaving ? '保存中...' : '保存草稿'}</span>
           </button>
 
           <button
             onClick={handleDownloadMarkdown}
-            className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-colors"
+            className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-smooth hover-lift"
           >
             <Download className="w-3.5 h-3.5" />
             <span>导出 .md</span>
@@ -192,7 +192,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
           <button
             onClick={handleCopyWechatHtml}
-            className={`px-4 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition-colors shadow-xs ${
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition-smooth shadow-xs hover-lift ${
               copied
                 ? 'bg-emerald-600 text-white'
                 : 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white'
@@ -200,8 +200,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-white" />
-                <span className="text-white">已复制（直接粘贴微信后台）</span>
+                <Check className="w-3.5 h-3.5 text-white animate-fade-in" />
+                <span className="text-white animate-fade-in">已复制（直接粘贴微信后台）</span>
               </>
             ) : (
               <>
@@ -234,9 +234,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           <div className="px-4 py-2 bg-slate-100 border-b border-slate-200 text-xs text-slate-600 font-semibold flex items-center justify-between">
             <span>Markdown 正文编辑</span>
             {isStreaming && (
-              <span className="text-[11px] text-blue-600 flex items-center space-x-1">
-                <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
-                <span>正在流式撰写中...</span>
+              <span className="text-[11px] text-blue-600 flex items-center space-x-1 animate-fade-in">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse-glow"></span>
+                <span className="animate-typing-cursor">正在流式撰写中</span>
               </span>
             )}
           </div>

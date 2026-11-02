@@ -31,15 +31,15 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({
             <div
               key={tpl.id}
               onClick={() => onSelectTemplate(tpl)}
-              className={`relative p-3 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
+              className={`relative p-3 rounded-xl border transition-smooth cursor-pointer flex flex-col justify-between hover-lift ${
                 isSelected
                   ? 'border-blue-600 bg-blue-50/20 ring-1 ring-blue-600 shadow-xs'
-                  : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-2xs'
+                  : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-md'
               }`}
             >
               {/* Checkmark icon for selected */}
               {isSelected && (
-                <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center animate-fade-in">
                   <Check className="w-3 h-3 stroke-[3]" />
                 </div>
               )}
