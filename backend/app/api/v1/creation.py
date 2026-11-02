@@ -6,6 +6,8 @@ from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.core.database import get_db, AsyncSessionLocal
+from app.core.auth import get_current_user_optional
+from app.models.user import User
 from app.models.category import Category, Template
 from app.models.prompt_config import PromptConfig
 from app.models.article import Article, OutlineCandidate
@@ -36,7 +38,12 @@ async def parse_url_content(payload: ParseUrlRequest):
     return data
 
 @router.post("/expand-topic", response_model=ExpandTopicResponse)
-async def expand_topic_from_keywords(payload: ExpandTopicRequest, batch: int = 1, db: AsyncSession = Depends(get_db)):
+async def expand_topic_from_keywords(
+    payload: ExpandTopicRequest,
+    batch: int = 1,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_optional)
+):
     """根据创作者输入的零散关键词，调用大模型意图理解，扩展为专业的主题与行文要求 (支持换一换)"""
     # 查找赛道与模板名称
     cat_query = select(Category).where(Category.id == payload.category_id)
@@ -60,7 +67,11 @@ async def expand_topic_from_keywords(payload: ExpandTopicRequest, batch: int = 1
     return {"suggestions": suggestions}
 
 @router.post("/generate-outline-stream")
-async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSession = Depends(get_db)):
+async def generate_outline_stream(
+    payload: GenerateOutlineRequest,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_optional)
+):
     """流式生成 3 组候选标题与结构大纲 (SSE)"""
     # 1. 查找对应模板的 Prompt 配置
     query = select(PromptConfig).where(
@@ -95,8 +106,10 @@ async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSess
 
     # 预创建 Article 记录
     article_id = str(uuid.uuid4())
+    user_id = current_user.id if current_user else "anonymous"
     new_article = Article(
         id=article_id,
+        user_id=user_id,
         category_id=payload.category_id,
         template_id=payload.template_id,
         input_type=payload.input_type,
@@ -202,7 +215,11 @@ async def generate_outline_stream(payload: GenerateOutlineRequest, db: AsyncSess
 
 
 @router.post("/generate-article-stream")
-async def generate_article_stream(payload: GenerateArticleRequest, db: AsyncSession = Depends(get_db)):
+async def generate_article_stream(
+    payload: GenerateArticleRequest,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user_optional)
+):
     """基于选定的大纲流式生成长文全文正文 (SSE)"""
     # 1. 查找文章记录
     query = select(Article).where(Article.id == payload.article_id)

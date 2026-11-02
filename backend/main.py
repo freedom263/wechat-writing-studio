@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.seed.seed_data import init_and_seed_db
+from app.api.v1.auth import router as auth_router
 from app.api.v1.categories import router as categories_router
 from app.api.v1.prompts import router as prompts_router
 from app.api.v1.creation import router as creation_router
@@ -34,6 +35,7 @@ app.add_middleware(
 )
 
 # 挂载业务路由
+app.include_router(auth_router, prefix=settings.API_V1_STR)
 app.include_router(categories_router, prefix=settings.API_V1_STR)
 app.include_router(prompts_router, prefix=settings.API_V1_STR)
 app.include_router(creation_router, prefix=settings.API_V1_STR)

@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     DEEPSEEK_BASE_URL: str = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
     DEFAULT_MODEL: str = "deepseek-chat"
 
+    # JWT 认证配置
+    JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY", "your-secret-key-please-change-in-production")
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 天
+
     # CORS 跨域允许源（生产环境从 FRONTEND_URL 读取）
     @property
     def cors_origins(self) -> List[str]:
