@@ -25,7 +25,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const [copied, setCopied] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveNotice, setSaveNotice] = useState('');
-  const autoSaveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const autoSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setTitle(initialTitle);

@@ -152,7 +152,7 @@ export function App() {
                 <div className="animate-fade-in pt-2">
                   <CandidatesView
                     candidates={candidates}
-                    onConfirmGenerateArticle={handleConfirmCandidate}
+                    onConfirmGenerateArticle={confirmCandidate}
                     isGeneratingArticle={isStreamingArticle}
                   />
                 </div>
