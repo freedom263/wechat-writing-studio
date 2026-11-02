@@ -140,9 +140,9 @@ TEMPLATES_DATA = [
         "id": "ca_hot_deep", "category_id": "current_affairs", "name": "热点深度解读", "tag": "深度剖析", "sort_order": 1,
         "description": "不随波逐流，从热点新闻表象挖掘背后深层社会动因与趋势。",
         "outline_system": "你是一位理性克制的时事评论主笔，擅长从喧嚣中梳理关键脉络。",
-        "outline_user": "针对时事热点【{topic}】构思 3 组兼具思考力与严谨度的大纲。以 JSON 输出。",
+        "outline_user": "针对时事热点【{topic}】构思 3 组兼具思考力与严谨度的大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
         "article_system": "你是一位知名时评专栏作者，逻辑缜密，见解独到。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字时评文章。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字时评文章。语言风格：{language_style}，写作基调：{tone}。",
         "append_disclaimer": False
     },
     {
@@ -154,15 +154,33 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字复盘文章。",
         "append_disclaimer": False
     },
+    {
+        "id": "ca_opinion", "category_id": "current_affairs", "name": "观点评论", "tag": "立场观点", "sort_order": 3,
+        "description": "针对社会现象或公共议题表达独到见解，引发读者思考。",
+        "outline_system": "你是一位有态度的评论员，敢于表达独立观点。",
+        "outline_user": "针对议题【{topic}】构思 3 组观点鲜明的评论大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位犀利的评论作家，论证有力且引人深思。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字评论文章。写作基调：{tone}，专业程度：{professionalism}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "ca_data_analysis", "category_id": "current_affairs", "name": "数据事实分析", "tag": "数据解读", "sort_order": 4,
+        "description": "用数据说话，客观呈现事实真相，破除情绪化解读。",
+        "outline_system": "你是一位数据新闻记者，善于用图表和数据讲故事。",
+        "outline_user": "针对话题【{topic}】设计 3 组数据驱动的分析大纲。以 JSON 输出。",
+        "article_system": "你是一位严谨的数据分析师，用事实和数据支撑论证。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字数据分析文章。",
+        "append_disclaimer": False
+    },
 
     # 4. 职场成长
     {
         "id": "wp_communication", "category_id": "workplace", "name": "职场情商沟通", "tag": "话术干货", "sort_order": 1,
         "description": "向上汇报、跨部门沟通与化解冲突的高情商实操话术。",
         "outline_system": "你是一位世界500强前高管兼职场导师，实操经验丰富。",
-        "outline_user": "针对职场沟通主题【{topic}】设计 3 组具有共鸣感的大纲。以 JSON 输出。",
+        "outline_user": "针对职场沟通主题【{topic}】设计 3 组具有共鸣感的大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位资深职场顾问，提供结构化的沟通解法。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字职场干货文章。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字职场干货文章。写作基调：{tone}，专业程度：{professionalism}。",
         "append_disclaimer": False
     },
     {
@@ -174,15 +192,33 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文章。",
         "append_disclaimer": False
     },
+    {
+        "id": "wp_time_management", "category_id": "workplace", "name": "效率时间管理", "tag": "效率提升", "sort_order": 3,
+        "description": "GTD方法论、番茄工作法、精力管理等高效工作技巧。",
+        "outline_system": "你是一位时间管理专家与效率提升教练。",
+        "outline_user": "针对效率主题【{topic}】构思 3 组实用大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位生产力专家，提供可落地的效率工具和方法。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字效率干货文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "wp_workplace_survival", "category_id": "workplace", "name": "职场避坑指南", "tag": "职场生存", "sort_order": 4,
+        "description": "识别职场陷阱、应对办公室政治、保护自己的实战指南。",
+        "outline_system": "你是一位阅历丰富的职场导师，见过各种职场套路。",
+        "outline_user": "针对职场风险话题【{topic}】设计 3 组避坑大纲。以 JSON 输出。",
+        "article_system": "你是一位直言不讳的职场前辈，提供务实的生存智慧。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字避坑指南。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
 
     # 5. 情感心理
     {
         "id": "em_healing", "category_id": "emotion", "name": "治愈共鸣随笔", "tag": "温暖治愈", "sort_order": 1,
         "description": "抚平焦虑，提供情绪价值与自我和解的温暖文字。",
         "outline_system": "你是一位温暖走心的心理咨询师兼散文作家。",
-        "outline_user": "针对情感困扰【{topic}】生成 3 组直击人心的文章大纲。以 JSON 输出。",
+        "outline_user": "针对情感困扰【{topic}】生成 3 组直击人心的文章大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位善于倾听的情感专栏作家，文字细腻温柔。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字疗愈长文。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字疗愈长文。写作基调：{tone}。",
         "append_disclaimer": False
     },
     {
@@ -194,15 +230,33 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文章。",
         "append_disclaimer": False
     },
+    {
+        "id": "em_self_growth", "category_id": "emotion", "name": "自我成长觉察", "tag": "认知升级", "sort_order": 3,
+        "description": "引导读者进行自我反思、认知重构与心智成长。",
+        "outline_system": "你是一位心理成长导师，擅长引导读者深度自我觉察。",
+        "outline_user": "针对成长话题【{topic}】构思 3 组启发性大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位温和而有深度的心理专栏作家。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字成长文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "em_psychology_science", "category_id": "emotion", "name": "心理学科普", "tag": "心理机制", "sort_order": 4,
+        "description": "用通俗语言解读心理学概念、实验与日常应用。",
+        "outline_system": "你是一位心理学科普作家，善于将学术知识转化为生活洞察。",
+        "outline_user": "针对心理学话题【{topic}】设计 3 组科普大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位心理学博主，用案例和故事讲解心理机制。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字科普文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
 
     # 6. 科技商业
     {
         "id": "tech_ai_review", "category_id": "tech", "name": "AI与科技评测", "tag": "前沿应用", "sort_order": 1,
         "description": "实操评测最新 AI 工具或科技产品，赋能个人与企业效率。",
         "outline_system": "你是一位硬核科技博主与数字化转型顾问。",
-        "outline_user": "针对科技主题【{topic}】构思 3 组具有高价值感的大纲。以 JSON 输出。",
+        "outline_user": "针对科技主题【{topic}】构思 3 组具有高价值感的大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位科技专栏作者，用通俗语言拆解复杂技术。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字评测文章。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字评测文章。写作基调：{tone}。",
         "append_disclaimer": False
     },
     {
@@ -214,15 +268,60 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字深度研报。",
         "append_disclaimer": False
     },
+    {
+        "id": "tech_trend", "category_id": "tech", "name": "科技趋势洞察", "tag": "前沿趋势", "sort_order": 3,
+        "description": "解读前沿科技趋势、行业变革与未来机会。",
+        "outline_system": "你是一位科技趋势分析师，关注技术发展与产业变革。",
+        "outline_user": "针对科技趋势【{topic}】构思 3 组前瞻性大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位科技观察家，善于捕捉技术变革的信号。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字趋势分析文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "tech_tutorial", "category_id": "tech", "name": "技术教程实战", "tag": "实操教学", "sort_order": 4,
+        "description": "手把手教学技术实操，从入门到精通的系统指南。",
+        "outline_system": "你是一位技术讲师，擅长将复杂技术拆解为易学步骤。",
+        "outline_user": "针对技术主题【{topic}】设计 3 组教学大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位耐心的技术导师，提供清晰的实操指南。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字教程文章。排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
 
     # 7. 生活方式
     {
         "id": "life_minimalist", "category_id": "life", "name": "极简生活美学", "tag": "生活哲学", "sort_order": 1,
         "description": "分享断舍离、精简生活与专注内心的生活灵感。",
         "outline_system": "你是一位极简生活家与生活美学倡导者。",
-        "outline_user": "针对生活方式【{topic}】提供 3 组大纲。以 JSON 输出。",
+        "outline_user": "针对生活方式【{topic}】提供 3 组大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位热爱生活的美学作家，文风清爽松弛。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字生活随笔。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字生活随笔。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "life_habit", "category_id": "life", "name": "好习惯养成", "tag": "自律成长", "sort_order": 2,
+        "description": "早起、运动、阅读等优质习惯的养成方法与坚持技巧。",
+        "outline_system": "你是一位习惯养成教练，擅长将行为科学转化为实践方法。",
+        "outline_user": "针对习惯养成主题【{topic}】设计 3 组实操大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位自律博主，分享科学可行的习惯养成方法。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字习惯指南。排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "life_slow_living", "category_id": "life", "name": "慢生活实践", "tag": "松弛感", "sort_order": 3,
+        "description": "在快节奏时代寻找慢下来的智慧，享受当下的生活态度。",
+        "outline_system": "你是一位慢生活倡导者，追求内心的平静与丰盈。",
+        "outline_user": "针对慢生活话题【{topic}】构思 3 组治愈大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位温柔的生活作家，文字舒缓而有力量。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字慢生活文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "life_home_organization", "category_id": "life", "name": "家居收纳整理", "tag": "空间美学", "sort_order": 4,
+        "description": "收纳技巧、空间规划与打造温馨家居的实用方法。",
+        "outline_system": "你是一位收纳整理师与家居博主，精通空间规划。",
+        "outline_user": "针对家居整理【{topic}】设计 3 组实用大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位家居生活专家，提供易操作的整理方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字收纳指南。排版格式：{formatting}。",
         "append_disclaimer": False
     },
 
@@ -231,9 +330,36 @@ TEMPLATES_DATA = [
         "id": "edu_parenting", "category_id": "education", "name": "科学育儿指南", "tag": "家庭教育", "sort_order": 1,
         "description": "结合儿童发展心理学，提供不焦虑的亲子沟通与陪伴方法。",
         "outline_system": "你是一位儿童心理学专家与正面管教讲师。",
-        "outline_user": "针对教育困惑【{topic}】构思 3 组科学育儿大纲。以 JSON 输出。",
+        "outline_user": "针对教育困惑【{topic}】构思 3 组科学育儿大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
         "article_system": "你是一位亲切的家庭教育导师，提供实操性极强的育儿建议。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字教育长文。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字教育长文。语言风格：{language_style}，写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "edu_learning_methods", "category_id": "education", "name": "学习方法指导", "tag": "学习力", "sort_order": 2,
+        "description": "培养孩子的学习兴趣、学习习惯与高效学习方法。",
+        "outline_system": "你是一位教育心理学专家，深谙学习科学与认知规律。",
+        "outline_user": "针对学习方法主题【{topic}】设计 3 组实用大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位学习方法专家，提供可操作的学习策略。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字学习指导文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "edu_teenager_communication", "category_id": "education", "name": "青春期沟通", "tag": "亲子关系", "sort_order": 3,
+        "description": "理解青春期孩子的心理特点，建立有效沟通桥梁。",
+        "outline_system": "你是一位青少年心理咨询师，擅长亲子关系修复。",
+        "outline_user": "针对青春期话题【{topic}】构思 3 组共情大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位温和的家庭教育专家，理解父母与青少年双方的处境。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字沟通指南。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "edu_quality_education", "category_id": "education", "name": "素质教育实践", "tag": "全面发展", "sort_order": 4,
+        "description": "艺术启蒙、体育锻炼、社会实践等素质教育的家庭实践方法。",
+        "outline_system": "你是一位素质教育倡导者，关注孩子的全面发展。",
+        "outline_user": "针对素质教育【{topic}】设计 3 组实践大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位教育实践者，分享可落地的素质培养方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字实践指南。排版格式：{formatting}。",
         "append_disclaimer": False
     },
 
@@ -242,9 +368,36 @@ TEMPLATES_DATA = [
         "id": "cul_history_story", "category_id": "culture", "name": "历史人物沉浮", "tag": "文史新读", "sort_order": 1,
         "description": "在真实史料中打捞生动的人性细节，借古鉴今。",
         "outline_system": "你是一位文史专栏作家，擅长讲好看的历史人物故事。",
-        "outline_user": "针对历史话题【{topic}】设计 3 组引人入胜的大纲。以 JSON 输出。",
+        "outline_user": "针对历史话题【{topic}】设计 3 组引人入胜的大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位饱读诗书的历史作家，以生动笔触还原历史现场。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文史文章。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文史文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "cul_traditional_culture", "category_id": "culture", "name": "传统文化解读", "tag": "国学经典", "sort_order": 2,
+        "description": "解读诗词、成语、节日等传统文化符号背后的历史与智慧。",
+        "outline_system": "你是一位国学学者，擅长将古典文化与现代生活相连接。",
+        "outline_user": "针对传统文化【{topic}】构思 3 组解读大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位文化学者，用现代视角重新审视传统智慧。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文化解读文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "cul_cultural_comparison", "category_id": "culture", "name": "中西文化对比", "tag": "文化差异", "sort_order": 3,
+        "description": "比较中西文化差异，探讨文化交流与文明互鉴。",
+        "outline_system": "你是一位跨文化研究学者，对中西文化有深入理解。",
+        "outline_user": "针对文化对比主题【{topic}】设计 3 组比较大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位文化观察者，客观呈现不同文化的特点与价值。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文化对比文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "cul_archaeology_discovery", "category_id": "culture", "name": "考古发现解密", "tag": "历史探秘", "sort_order": 4,
+        "description": "解读考古发现，揭示历史真相与文明演进。",
+        "outline_system": "你是一位考古科普作家，善于讲述文物背后的故事。",
+        "outline_user": "针对考古话题【{topic}】构思 3 组科普大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位考古学者，用文物讲述历史的真实面貌。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字考古科普文章。排版格式：{formatting}。",
         "append_disclaimer": False
     },
 
@@ -253,9 +406,36 @@ TEMPLATES_DATA = [
         "id": "trv_guide", "category_id": "travel", "name": "小众目的地探索", "tag": "旅行漫游", "sort_order": 1,
         "description": "避开人潮，寻找具有独特烟火气与自然风光的松弛之旅。",
         "outline_system": "你是一位资深旅行探险家与人文地理摄影师。",
-        "outline_user": "针对目的地【{topic}】生成 3 组探索大纲。以 JSON 输出。",
+        "outline_user": "针对目的地【{topic}】生成 3 组探索大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位文字优美生动的旅行作家，描摹旅途的风景与故事。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字深度游记。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字深度游记。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "trv_city_culture", "category_id": "travel", "name": "城市文化漫游", "tag": "人文探索", "sort_order": 2,
+        "description": "深入城市街巷，探索当地文化、美食与生活方式。",
+        "outline_system": "你是一位城市文化观察者，善于捕捉城市的独特气质。",
+        "outline_user": "针对城市文化【{topic}】构思 3 组人文大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位城市漫游作家，用细腻笔触呈现城市肌理。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字城市游记。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "trv_nature_adventure", "category_id": "travel", "name": "自然探险记", "tag": "户外冒险", "sort_order": 3,
+        "description": "徒步、露营、登山等户外探险经历与自然风光记录。",
+        "outline_system": "你是一位户外运动爱好者与自然摄影师。",
+        "outline_user": "针对户外主题【{topic}】设计 3 组探险大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位户外作家，记录人与自然的对话。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字探险游记。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "trv_practical_guide", "category_id": "travel", "name": "实用旅行攻略", "tag": "行程规划", "sort_order": 4,
+        "description": "详细的行程规划、预算控制、交通住宿等实用旅行信息。",
+        "outline_system": "你是一位旅行规划师，擅长制定高性价比的旅行方案。",
+        "outline_user": "针对旅行规划【{topic}】构思 3 组攻略大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位旅行博主，提供详实的旅行攻略。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字实用攻略。排版格式：{formatting}。",
         "append_disclaimer": False
     },
 
@@ -264,9 +444,36 @@ TEMPLATES_DATA = [
         "id": "op_growth", "category_id": "operation", "name": "爆款内容增长", "tag": "运营方法论", "sort_order": 1,
         "description": "复盘公众号与自媒体打造爆款文章、粉丝沉淀的操盘经验。",
         "outline_system": "你是一位头部自媒体内容操盘手与增长黑客。",
-        "outline_user": "针对运营策略【{topic}】设计 3 组干货大纲。以 JSON 输出。",
+        "outline_user": "针对运营策略【{topic}】设计 3 组干货大纲。面向受众：{target_reader}，语言风格：{language_style}。以 JSON 输出。",
         "article_system": "你是一位实战派运营导师，输出可复制的增长方法论。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字干货长文。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字干货长文。写作基调：{tone}，专业程度：{professionalism}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "op_user_ops", "category_id": "operation", "name": "用户运营策略", "tag": "用户增长", "sort_order": 2,
+        "description": "用户拉新、留存、促活的实战方法与案例拆解。",
+        "outline_system": "你是一位用户运营专家，深谙用户心理与社区运营。",
+        "outline_user": "针对用户运营【{topic}】设计 3 组运营策略大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位用户运营实战者，提供可落地的运营方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字运营方案。语言风格：{language_style}，排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "op_content_strategy", "category_id": "operation", "name": "内容运营规划", "tag": "内容策略", "sort_order": 3,
+        "description": "内容选题、创作流程与传播策略的系统化方法。",
+        "outline_system": "你是一位内容运营总监，擅长内容规划与传播。",
+        "outline_user": "针对内容运营【{topic}】构思 3 组内容策略大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位内容策略专家，提供系统化的内容运营方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字内容规划。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "op_community", "category_id": "operation", "name": "社群运营手册", "tag": "社群管理", "sort_order": 4,
+        "description": "社群搭建、日常运营与用户维系的实用指南。",
+        "outline_system": "你是一位社群运营专家，深谙社群动力学。",
+        "outline_user": "针对社群运营【{topic}】设计 3 组运营大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位社群运营实践者，分享可操作的社群运营方法。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字社群指南。专业程度：{professionalism}，自定义需求：{custom_requirements}。",
         "append_disclaimer": False
     },
 
@@ -284,9 +491,18 @@ TEMPLATES_DATA = [
         "id": "fin_analysis", "category_id": "finance", "name": "投资分析", "tag": "投资策略", "sort_order": 2,
         "description": "深度分析投资标的、市场趋势与投资机会。",
         "outline_system": "你是一位资深投资分析师，具备深厚的金融市场分析能力。",
-        "outline_user": "针对投资分析主题【{topic}】设计 3 组专业大纲。以 JSON 输出。",
+        "outline_user": "针对投资分析主题【{topic}】设计 3 组专业大纲。专业程度：{professionalism}。以 JSON 输出。",
         "article_system": "你是一位专业的投资分析师，提供客观深入的市场分析。",
-        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字投资分析文章。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字投资分析文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "fin_wealth_management", "category_id": "finance", "name": "财富管理策略", "tag": "资产配置", "sort_order": 3,
+        "description": "资产配置、风险分散与长期财富保值增值的策略。",
+        "outline_system": "你是一位财富管理顾问，擅长全局资产配置规划。",
+        "outline_user": "针对财富管理【{topic}】构思 3 组配置大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位资深财富规划师，提供系统化的资产配置方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字财富管理文章。写作基调：{tone}，排版格式：{formatting}。",
         "append_disclaimer": False
     },
 
@@ -300,6 +516,33 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字美食测评文章。写作基调：{tone}，排版格式：{formatting}。",
         "append_disclaimer": False
     },
+    {
+        "id": "food_cooking", "category_id": "food", "name": "家常菜谱", "tag": "烹饪教学", "sort_order": 2,
+        "description": "详细的家常菜烹饪教程与烹饪技巧分享。",
+        "outline_system": "你是一位家庭烹饪达人，擅长将复杂菜谱简化为易学步骤。",
+        "outline_user": "针对烹饪主题【{topic}】构思 3 组菜谱大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位烹饪博主，提供清晰易懂的烹饪指导。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字菜谱文章。排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "food_ingredients", "category_id": "food", "name": "食材选购指南", "tag": "美食知识", "sort_order": 3,
+        "description": "食材挑选技巧、储存方法与营养知识科普。",
+        "outline_system": "你是一位食材专家，精通食材的挑选、储存与营养价值。",
+        "outline_user": "针对食材话题【{topic}】设计 3 组科普大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位美食科普作家，分享实用的食材知识。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字科普文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "food_culture", "category_id": "food", "name": "美食文化探索", "tag": "饮食文化", "sort_order": 4,
+        "description": "探索地方美食背后的文化传承与历史故事。",
+        "outline_system": "你是一位美食文化研究者，善于挖掘美食背后的文化内涵。",
+        "outline_user": "针对美食文化【{topic}】构思 3 组文化大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位美食文化作家，讲述美食与文化的故事。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文化文章。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
 
     # 14. 影视娱乐
     {
@@ -311,6 +554,33 @@ TEMPLATES_DATA = [
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字影评文章。语言风格：{language_style}，写作基调：{tone}。",
         "append_disclaimer": False
     },
+    {
+        "id": "ent_celebrity", "category_id": "entertainment", "name": "明星八卦解读", "tag": "娱乐资讯", "sort_order": 2,
+        "description": "娱乐圈热点事件、明星动态的理性分析与观点解读。",
+        "outline_system": "你是一位娱乐评论员，关注娱乐圈动态与热点话题。",
+        "outline_user": "针对娱乐话题【{topic}】构思 3 组解读大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位娱乐博主，提供理性客观的娱乐评论。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字娱乐评论。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "ent_variety_show", "category_id": "entertainment", "name": "综艺观察", "tag": "节目点评", "sort_order": 3,
+        "description": "综艺节目的看点解析、嘉宾表现评价与节目模式探讨。",
+        "outline_system": "你是一位综艺观察者，熟悉各类综艺节目形式与制作逻辑。",
+        "outline_user": "针对综艺节目【{topic}】设计 3 组观察大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位综艺评论人，分享有趣的综艺观察视角。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字综艺评论。排版格式：{formatting}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "ent_pop_culture", "category_id": "entertainment", "name": "流行文化观察", "tag": "文化现象", "sort_order": 4,
+        "description": "流行文化现象的解读、亚文化群体的观察与文化趋势分析。",
+        "outline_system": "你是一位流行文化研究者，善于捕捉文化趋势与现象。",
+        "outline_user": "针对文化现象【{topic}】构思 3 组观察大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位文化观察者，解读流行文化背后的社会意义。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字文化观察文章。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
 
     # 15. 运动健身
     {
@@ -320,6 +590,33 @@ TEMPLATES_DATA = [
         "outline_user": "针对健身主题【{topic}】设计 3 组实用训练大纲。面向受众：{target_reader}，专业程度：{professionalism}。以 JSON 输出。",
         "article_system": "你是一位专业健身教练，提供科学安全的训练指导。",
         "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字健身指导文章。语言风格：{language_style}，排版格式：{formatting}。自定义需求：{custom_requirements}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "fitness_nutrition", "category_id": "fitness", "name": "运动营养搭配", "tag": "饮食管理", "sort_order": 2,
+        "description": "运动人群的饮食计划、营养补充与体重管理策略。",
+        "outline_system": "你是一位运动营养师，擅长为不同训练目标制定饮食方案。",
+        "outline_user": "针对运动营养【{topic}】构思 3 组饮食大纲。专业程度：{professionalism}。以 JSON 输出。",
+        "article_system": "你是一位营养专家，提供科学的运动饮食建议。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字营养指导。语言风格：{language_style}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "fitness_rehabilitation", "category_id": "fitness", "name": "运动康复指南", "tag": "伤病恢复", "sort_order": 3,
+        "description": "运动损伤预防、康复训练与身体功能恢复的专业指导。",
+        "outline_system": "你是一位运动康复治疗师，精通损伤预防与康复方法。",
+        "outline_user": "针对康复主题【{topic}】设计 3 组康复大纲。面向受众：{target_reader}。以 JSON 输出。",
+        "article_system": "你是一位康复专家，提供安全有效的康复方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字康复指导。写作基调：{tone}。",
+        "append_disclaimer": False
+    },
+    {
+        "id": "fitness_body_shape", "category_id": "fitness", "name": "体态塑形训练", "tag": "形体管理", "sort_order": 4,
+        "description": "针对性的塑形训练、体态矫正与身材管理方法。",
+        "outline_system": "你是一位形体教练，擅长体态评估与针对性训练设计。",
+        "outline_user": "针对塑形话题【{topic}】构思 3 组训练大纲。语言风格：{language_style}。以 JSON 输出。",
+        "article_system": "你是一位塑形专家，提供个性化的体态改善方案。",
+        "article_user": "根据标题【{title}】和大纲撰写约 {word_count} 字塑形指导。排版格式：{formatting}。",
         "append_disclaimer": False
     }
 ]
